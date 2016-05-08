@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Users</title>
+<link rel="stylesheet" href="/resources/css/style.css"></link>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+</head>
+
+<body>
+	<div class="container">
+			<div style="margin:1em 0;" class="pull-right">
+			<form style="position:relative" th:action="@{/logout}" method="post" class="form-inline">
+				<input class="form-control" type="submit" th:value="${userInfor.username}" />
+			</form>			
+		</div>
+
+	</div>
+	<div class="container">
+		<h1>
+			Users 			
+			<a th:href="@{/tweegs}" class="btn btn-sm btn-primary pull-right" style="margin-left :1em" >Tweegs</a>	
+		</h1>
+
+		<table class="table table-condensed">
+			<tr>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Admin</th>
+				<th></th>
+				<th>								
+					<a href="/users/create"><span class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus"></span></span></a>
+				</th>
+			</tr>
+
+			<tr th:each="user:${users}" >
+				<form class="form-horizontal" action="#" th:action="@{/users/update(uid=${user.id})}" th:object="${user}" method="post">
+		
+					<td th:if="${ user.id!='0'} "><!-- th:text="${user.username}" -->
+							<input th:value="${user.username}" id="username" name="username" type="text" placeholder="user name" class="form-control input-md" required=""/>
+					</td>
+					<td th:if="${ user.id!='0' }">  <!-- th:text="${user.password}" -->
+							<input th:value="${user.password}" id="passwordinput" name="passwordinput" type="text" placeholder="password" class="form-control input-md"/>
+					</td>
+					<td th:if="${ user.id!='0' }">
+							<input type="checkbox" th:checked="${user.isAdmin}" name="admininput" id="admininput" />
+					
+					</td>
+					<td th:if="${ user.id!='0' }">
+							<input type="submit" class="btn btn-sm btn-default" />
+					</td>
+					</form>
+				<td th:if="${ user.id!='0' }">	
+					<a th:href="@{/users/delete(uid=${user.id})}">
+						<span class="btn btn-sm btn-danger">
+						<span class="glyphicon glyphicon-trash"></span>
+						</span>
+					</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

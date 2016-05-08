@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Users</title>
+<link rel="stylesheet" href="/resources/css/style.css"></link>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="container" style="margin:1em 0;">
+			<form style="position:relative" th:action="@{/logout}" method="post" class="form-inline pull-right">
+				<input class="form-control" type="submit" th:value="${userInfor.username}" />
+			</form>			
+		</div>
+	
+	
+		<h1>
+			Tweegs <a th:if="${userInfor.isAdmin==true}" th:href="@{/users}" class="btn btn-sm btn-primary pull-right" style="margin-left :1em" >Users</a>	
+		</h1>
+
+		<table class="table table-condensed">
+			<tr>
+				<th>Posted</th>
+				<th>Public</th>
+				<th>Tweeger</th>
+				<th>Tweeg</th>
+				<th>
+					<a href="/tweegs/create"><span class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus"></span></span></a>
+				</th>
+			</tr>
+
+			<tr th:each="tweeg:${tweegs}">
+			
+				<td th:text="${tweeg.posted}" th:if="${tweeg.isPublic == true or tweeg.ownerId == userInfor.id}"></td>
+				<td th:if="${tweeg.isPublic == true  or tweeg.ownerId == userInfor.id}" th:text="${tweeg.isPublic}"></td> 
+				<td th:text="${tweeg.ownerName}" th:if="${tweeg.isPublic == true or tweeg.ownerId == userInfor.id}" ></td>
+				<td th:text ="${tweeg.text}" th:if="${tweeg.isPublic == true or tweeg.ownerId == userInfor.id}"></td>
+				<td>
+					<a th:href="@{/tweegs/{id}/delete(id=${tweeg.id})}"  th:if="${tweeg.ownerId == userInfor.id}">
+						<span class="btn btn-sm btn-danger" th:if="${tweeg.ownerId == userInfor.id}">
+						<span class="glyphicon glyphicon-trash"></span>
+						</span>
+					</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

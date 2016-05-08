@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Thymeleaf</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>		
+	<link rel="stylesheet" href="/resources/css/style.css"></link>	
+
+	<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+	<style>
+		body {
+			margin: 3em;
+		}
+		
+		.warning { font-style:italic; color: red;}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h3>Login</h3>
+		<form class="form" th:action="@{/login}" method="POST">
+			<span th:if="${error}" class="warning" id="warning">Error with username/password</span> 
+			<input type="text" class="form-control" placeholder="username" name="username" required=""></input><br/> 
+			<input type="password" class="form-control" placeholder="password" name="password" required=""></input><br/> 
+			<input type="submit" value="Login" class="form-control btn-primary"></input>
+		</form>
+	</div>
+</body>
+</html>

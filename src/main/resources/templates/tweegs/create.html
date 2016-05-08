@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Tweegs - create</title>
+<link rel="stylesheet" href="/resources/css/style.css"></link>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
+<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>
+			New Tweeg
+		</h1>
+
+		<form class="form-horizontal" th:action="@{/tweegs}" th:object="${tweeg}" method="post">
+			<fieldset>
+				<!-- Text input-->
+				<div class="form-group">
+					<label>Description</label>
+					<textarea class="form-control" th:field="*{text}" rows="3" id="textinput" ></textarea>
+					<!-- <div class="col-md-4">
+						<input name="description" type="text" placeholder="description" class="form-control input-md" required=""/>
+					</div> -->
+				</div>
+				
+				
+
+				<!-- Text input-->
+					<label>
+					      Public <input type="checkbox" th:checked="${false}" name="isPublic" id="isPublic" />
+					 </label>
+							
+			
+						<input class="btn-primary btn" type="submit" value="Create"></input>
+						<a href="/tweegs" style="text-decoration:none">
+							<input type="button" value="Cancel" class="btn btn-default"></input>
+						</a>										
+			</fieldset>
+		</form>
+
+	</div>
+</body>
+</html>
